@@ -1,6 +1,7 @@
 import argparse
 import mxnet as mx
 import numpy as np
+import os
 import pickle
 import predict_utils
 
@@ -14,10 +15,10 @@ if __name__ == '__main__':
     parser.add_argument('--name', type=str, default=config.segmentation_model_name, help='model\'s name')
     args = parser.parse_args()
 
-    val_ids = pickle.load(open(config.augumented_directory + config.val_ids_filename, "rb"))
-    val_brain_bboxes = pickle.load(open(config.augumented_directory + config.val_brain_bbox_filename, "rb")).astype(
+    val_ids = pickle.load(open(os.path.join(config.augumented_directory,config.val_ids_filename), "rb"))
+    val_brain_bboxes = pickle.load(open(os.path.join(config.augumented_directory,config.val_brain_bbox_filename), "rb")).astype(
         np.float)
-    val_tumor_bboxes = pickle.load(open(config.augumented_directory + config.val_tumor_bbox_filename, "rb")).astype(
+    val_tumor_bboxes = pickle.load(open(os.path.join(config.augumented_directory,config.val_tumor_bbox_filename), "rb")).astype(
         np.float)
 
     data_names = ['data_crop']
@@ -26,7 +27,7 @@ if __name__ == '__main__':
     m = model.Model(None, args.name, data_names=data_names,
                     label_names=label_names, context=[mx.gpu(0)], loss_index=[-1])
 
-    m.load('../models/{}/'.format(args.name), True)
+    m.load(os.path.join(config.models_root_path,args.name), True)
     m.module_desc['context'] = [mx.gpu(0)]
 
     scores = {}

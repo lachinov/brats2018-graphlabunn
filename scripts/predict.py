@@ -29,17 +29,21 @@ if __name__ == '__main__':
     m = model.Model(None, args.name, data_names=data_names,
                     label_names=label_names, context=[mx.gpu(0)], loss_index=[-1])
 
-    m.load('../models/{}/'.format(args.name), True)
+    m.load(os.path.join(config.models_root_path,args.name), True)
     m.module_desc['context'] = [mx.gpu(0)]
 
+    suffixes=config.data_suffixes
     if args.is_single_series:
         test_ids = ['']
+        suffixes = ['t1.nii.gz', 't2.nii.gz', 't1ce.nii.gz', 'flair.nii.gz']
 
     if not os.path.exists(args.out_data_dir):
         os.makedirs(args.out_data_dir)
 
     for idx in test_ids:
-        data, data_crop, affine, brain_bbox = predict_utils.read_image(idx, args.test_data_dir,separate_folder=(args.is_single_series == False))
+        data, data_crop, affine, brain_bbox = predict_utils.read_image(idx, suffixes=suffixes,
+                                                                       test_data_path=args.test_data_dir,
+                                                                       separate_folder=(args.is_single_series == False))
 
         label = predict_utils.predict(m, data, data_crop, brain_bbox)
 

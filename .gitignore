@@ -1,0 +1,6 @@
+/scripts/.idea/*
+/scripts/.ipynb_checkpoints/*
+.ipynb_checkpoints
+/models/*
+/scripts/*/*
+*.pyc

@@ -1,0 +1,14 @@
+numpy==1.14.5
+mxnet-cu92
+scikit-learn
+scikit-image
+scipy
+nibabel
+tqdm
+SimpleITK
+itk
+opencv-python
+mxboard
+cython
+matplotlib
+tensorboard

@@ -45,7 +45,7 @@ python predict.py --name <model's name> --test_data_dir <dir with test data> --o
 `--is_single_series` indicates whether test_data_dir has only single series.
 
 ## Config
-* data_directory - path to dataset root directory, should contain both HGG and LGG samples
+* data_directory - path to dataset root directory, should contain both HGG and LGG subdirectories
 * augumented_directory - the output of augmentation procedure, should be initially empty
 * models_root_path - path where the models will be stored
 * segmentation_model_name - name of the segmentation model

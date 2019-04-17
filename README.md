@@ -57,6 +57,9 @@ cd scripts
 sh preprocess_and_train.sh <available port>
 ```
 
+## Pre-trained model
+Download checkpoint with the following [link](https://drive.google.com/file/d/1unR-ThwBuorgzGhbCsnZVd8VXnVVqZnG/view?usp=sharing), where models directory names as 'models_sm_1' and model itself has the name 'only_seg'.
+
 ## Run
 ```
 python predict.py --name <model_name> --test_data_dir <input directory> --out_data_dir <output directory>
